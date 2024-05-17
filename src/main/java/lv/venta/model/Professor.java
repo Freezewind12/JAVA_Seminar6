@@ -45,7 +45,8 @@ public class Professor {
 	@Column(name = "Degree")
 	private Degree degree;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "professor") //need to specify title of variable
+	@ToString.Exclude
 	private Course course;
 	
 	public Professor(String name, String surname, Degree degree) {

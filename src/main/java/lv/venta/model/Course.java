@@ -1,10 +1,14 @@
 package lv.venta.model;
 
+import java.util.Collection;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -31,8 +35,8 @@ public class Course {
 	private long idc;
 	
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
-	@Size(min = 5, max = 20)
+	@Pattern(regexp = "[A-Z]{1}[a-z _]+")
+	@Size(min = 3, max = 30)
 	@Column(name = "Title")
 	private String title;
 	
@@ -42,5 +46,17 @@ public class Course {
 	private int cp;
 	
 	@OneToOne
+	@JoinColumn(name = "Idp") //need to specify column name
 	private Professor professor;
+	
+	@OneToMany(mappedBy = "course")
+	@ToString.Exclude
+	private Collection<Grade> grades;
+	
+	public Course(String title, int creditpoints, Professor professor)
+	{
+		setTitle(title);
+		setCp(creditpoints);
+		setProfessor(professor);
+	}
 }
