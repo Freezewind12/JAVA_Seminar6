@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -20,14 +19,14 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "ProfessorTable")
+@Table(name = "StudentTable")
 @Entity
-public class Professor {
+public class Student {
 	@Setter(value = AccessLevel.NONE)
-	@Column(name = "IDp")
+	@Column(name = "IDs")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idp;
+	private long ids;
 	
 	@NotNull
 	@Pattern(regexp = "[A-Z]{1}[a-z]+")
@@ -41,16 +40,8 @@ public class Professor {
 	@Column(name = "Surname")
 	private String surname;
 	
-	@NotNull
-	@Column(name = "Degree")
-	private Degree degree;
-	
-	@OneToOne
-	private Course course;
-	
-	public Professor(String name, String surname, Degree degree) {
+	public Student(String name, String surname) {
 		setName(name);
 		setSurname(surname);
-		setDegree(degree);
 	}
 }
