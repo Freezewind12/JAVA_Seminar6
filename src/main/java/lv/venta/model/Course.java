@@ -36,7 +36,7 @@ public class Course {
 	
 	@NotNull
 	@Pattern(regexp = "[A-Z]{1}[a-z _]+")
-	@Size(min = 3, max = 30)
+	@Size(min = 3	, max = 30)
 	@Column(name = "Title")
 	private String title;
 	
